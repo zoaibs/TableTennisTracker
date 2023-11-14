@@ -67,3 +67,14 @@ body {
     width:2em;
     
 }
+
+.login {
+    display: flex;
+    justify-content: center;
+}
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
