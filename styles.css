@@ -5,6 +5,7 @@
     --red:#C33C1C;
     --blue:#15709D;
     --turquoise: #1F80A3;
+    --light-blue:#A2DCEA;
   }
 
 
@@ -16,8 +17,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background-color: rgb(9, 73, 130);
+body {
+    background-color: var(--turquoise);
     margin:0em;
 }
 
@@ -26,7 +27,7 @@ body{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #0a66ac;
+    background-color: var(--blue);
     border-bottom: 0.1em solid white;
     
 }
@@ -40,8 +41,9 @@ body{
     
 }
 .navitem:hover {
-    background-color: #06528c;
-    text-decoration-color: rgba(255, 255, 255, 1);
+    background-color: var(--turquoise);
+    text-decoration-color: var(--beige);
+    color: var(--beige);
 
 }
 
