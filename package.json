@@ -1,0 +1,24 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "login form",
+  "main": "login.js",
+  "scripts": {
+    "test": "hi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoaibs/TableTennisTracker.git"
+  },
+  "keywords": [
+    "ping",
+    "pong",
+    "tournament"
+  ],
+  "author": "Zoaib Sihorwala",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zoaibs/TableTennisTracker/issues"
+  },
+  "homepage": "https://github.com/zoaibs/TableTennisTracker#readme"
+}
