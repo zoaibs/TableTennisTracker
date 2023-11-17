@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>TableTennisTracker</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+        
     </head>
     <body>  
         <div class="navbar">
@@ -21,15 +23,22 @@
             
         </div>
         <h1 class="main-title">Welcome to TableTennisTracker!</h1>
-        
-        <div class="login-container">
-            <a>Log back in or sign up if you are a new user!</a>
-            <div class="login">
-                <button class="login-button">Log In</button>
-                <button class="signup-button">Sign Up</button>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="login-container">
+                <a class="login-title">Log back in or sign up if you are a new user!</a>
+                <form action="/auth" method="post" style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="username" style="font-family: Poppins, sans-serif; color:white" placeholder="Username" required>Username:</label><br>
+                    <input type="text" id="password" name="username"><br>
+                    <label for="password" style="font-family: Poppins, sans-serif; color:white" placeholder="Username" required>Password:</label><br>
+                    <input type="text" id="password" name="password">
+                    <!-- <input type="submit" class="login-button"> -->
+                    <div class="login">
+                        <input type="submit" class="signup-button">
+                    </div>
+                </form>
+                
             </div>
         </div>
-
 
 
     </body>

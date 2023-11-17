@@ -15,7 +15,6 @@
     font-weight: bold;
     color: white;
     font-family: 'Poppins', sans-serif;
-}
 
 body {
     background-color: var(--turquoise);
@@ -70,11 +69,8 @@ body {
 
 .login {
     display: flex;
-    justify-content: center;
 }
 
 .login-container{
     display: flex;
-    justify-content: center;
-    flex-direction: row;
 }
