@@ -69,8 +69,47 @@ body {
 
 .login {
     display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
+
 .login-container{
+
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--dark-blue);
+    border: 0.1em solid white;
+    border-radius: 0.5em;
+    width: 25em;
+    padding:0.7em;
+}
+
+.login-button{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border: 0.1em solid white;
+    background-color: #15709D;
+    border-radius: 0.7em;
+    padding: 0.3em;
+    margin:0.4em;
+    font-size: 1.1em;
+}
+
+.signup-button{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border: 0.1em solid white;
+    background-color: #15709D;
+    border-radius: 0.7em;
+    padding: 0.3em;
+    margin:0.4em;
+    font-size: 1.1em;
+}
+
+.login-title{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin:0.3em;
 }

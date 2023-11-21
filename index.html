@@ -5,9 +5,10 @@
         <title>TableTennisTracker</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+         
         
     </head>
-    <body>  
+    <body>
         <div class="navbar">
             
             <ul class="navlist">
@@ -26,21 +27,18 @@
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div class="login-container">
                 <a class="login-title">Log back in or sign up if you are a new user!</a>
-                <form action="/auth" method="post" style="display: flex; flex-direction: column; align-items: center;">
-                    <label for="username" style="font-family: Poppins, sans-serif; color:white" placeholder="Username" required>Username:</label><br>
-                    <input type="text" id="password" name="username"><br>
-                    <label for="password" style="font-family: Poppins, sans-serif; color:white" placeholder="Username" required>Password:</label><br>
+                <form id="loginForm" class="login">
+                    <a>Username</a>
+                    <input type="text" id="username" name="username">
+                    <a>Password</a>
                     <input type="text" id="password" name="password">
-                    <!-- <input type="submit" class="login-button"> -->
-                    <div class="login">
-                        <input type="submit" class="signup-button">
-                    </div>
+
+                    <button class="login-button" type="submit">Submit</button>
                 </form>
-                
             </div>
         </div>
 
-
+        <script type="text/javascript" src="script.js"></script>
     </body>
 </html>
 
