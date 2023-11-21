@@ -5,15 +5,20 @@ mongoose.connect("mongodb+srv://zoaibsihorwala:zoaibsihorwala@tabletennistracker
 
 run()
 async function run() {
-    const user1 = await User.create({
-        username:"kyle", 
-        password: "ninfds",
-        elo: 1000
-    })
-    user1.username = "Billy"
-    user1.createdAt = 12
-    await user1.save()
-    console.log(user1);
+    const user = await User.findByName("kyle")
+    // user.bestOpponent = '655cf8e02594390bd0c403f9'
+    // await user.save()
+    //user.sayHi()
+    console.log(user)
+    // const user1 = await User.create({
+    //     username:"kyle", 
+    //     password: "ninfds",
+    //     elo: 1000
+    // })
+    // user1.username = "Billy"
+    // user1.createdAt = 12
+    // await user1.save()
+    // console.log(user1);
 }
 
 
@@ -34,6 +39,19 @@ async function run() {
 //     }
 
 //     //if(username)
-  
+        //20:16
     
 //   });
+
+
+// currentUser.matchHistory.push({
+//     opponent: opponentId,
+//     score: {
+//         userPoints: userPointsScored,
+//         opponentPoints: opponentPointsScored
+//     },
+//     datePlayed: new Date()
+// });
+
+// // Save the user object after updating matchHistory
+// await currentUser.save();
