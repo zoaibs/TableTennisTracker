@@ -2,7 +2,7 @@
   "name": "tabletennistracker",
   "version": "1.0.0",
   "description": "table tennis tracker tool?",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "what"
   },
