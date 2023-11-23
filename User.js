@@ -52,8 +52,13 @@ userSchema.methods.sayHi = function() {
 }
 
 // Add a method to the schema to compare passwords
-userSchema.methods.comparePassword = function(candidatePassword) {
-    return bcrypt.compare(candidatePassword, this.password);
+
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    try {
+        return await bcrypt.compare(candidatePassword, this.password);
+    } catch (error) {
+        throw new Error(error);
+    }
 };
 
 userSchema.statics.findByName = function(username) {
