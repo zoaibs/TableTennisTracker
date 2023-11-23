@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -50,6 +51,11 @@ userSchema.methods.sayHi = function() {
     console.log(`Hi. My name is ${this.username}`)
 }
 
+// Add a method to the schema to compare passwords
+userSchema.methods.comparePassword = function(candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
+
 userSchema.statics.findByName = function(username) {
     return this.find({username: new RegExp(username, "i")})
 }
@@ -57,8 +63,6 @@ userSchema.statics.findByName = function(username) {
 // userSchema.query.byName = function(name) {
 
 // }
-
-
 
 module.exports = mongoose.model("User", userSchema)
 

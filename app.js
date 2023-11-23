@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes'); // Assuming you have a routes.js file
+const bcrypt = require('bcrypt')
 
 const app = express();
-
+//hi
 app.use(express.json());
 
 // Connect to MongoDB
