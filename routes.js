@@ -8,7 +8,8 @@ router.post('/register', async (req, res) => {
         const { username, password } = req.body;
 
         if(password.length < 8){
-            return res.status(400).json({ message: 'Password is too short!' });
+            console.log("Too short!")
+            return res.status(200).json({ message: "Password is too short!" });
         }
 
         // Check if a user with the same username already exists
@@ -24,7 +25,7 @@ router.post('/register', async (req, res) => {
             //if passwords DONT match
             if (!passwordMatch) {
                 console.log("taken already")
-                return res.status(400).json({ message: 'Username already taken' });
+                return res.status(200).json({ message: 'Username already taken' });
             } else {
                 //sign in the user if they do match!
                 console.log("Welcome back!")
@@ -36,15 +37,13 @@ router.post('/register', async (req, res) => {
             console.log("created new user!")
 
             const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
-            const hashedPassword2 = await bcrypt.hash(password, 10); // Hash the password
             console.log(hashedPassword)
-            console.log(hashedPassword2)
             const newUser = new User({ username: username, password: hashedPassword });
             await newUser.save();
             res.status(201).json({ message: 'User created successfully' });
         }
 
-        // If no existing user or password matches, create a new user
+        // If no existing user or password matches, create a new user 
         
     } catch (error) {
         res.status(500).json({ message: 'Error creating user' });
