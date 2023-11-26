@@ -1,0 +1,87 @@
+:root {
+    --tan: #EDDEDB;
+    --beige: #DEC8BD;
+    --orange: #DF542D;
+    --red: #C33C1C;
+    --blue: #15709D;
+    --turquoise: #1F80A3;
+    --light-blue: #A2DCEA;
+}
+
+body {
+    background-color: var(--turquoise);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: var(--blue);
+    border-bottom: 0.1em solid white;
+    overflow: hidden;
+}
+
+.navlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navitem {
+    float: right;
+    transition: background-color 300ms linear, text-decoration-color 300ms linear;
+}
+
+.navitem:hover {
+    background-color: var(--turquoise);
+    text-decoration-color: var(--beige);
+    color: var(--beige);
+}
+
+.navitem a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+}
+
+.logo {
+    max-width: 2em;
+    max-height: 2em;
+    padding: 0;
+    margin: 0.5em;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: var(--beige);
+    border-radius: 0.7em;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+.objective-content {
+    margin-top: 2em;
+}
+
+.objective-info {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--blue);
+}
+
+.objective-text {
+    text-align: justify;
+    font-size: 1.5rem;
+    color: var(--blue);
+    margin-top: 1em;
+}
