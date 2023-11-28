@@ -14,7 +14,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     //     console.log("tooshort")
     //     //document.getElementById("username").value = "";
     // } else {
-        //popup.classList.remove("show")
+    //popup.classList.remove("show")
+
     try {
         const response = await fetch('/register', {
             method: 'POST',
@@ -33,7 +34,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             popup.classList.add("show");
 
         } else if(data.message === "Password is too short!"){
-            console.log("attempting po[uo[")
+            console.log("attempting popup")
             //popup.classList.add("hide")
             popup.textContent = "Password must be at least 8 characters!"
             popup.classList.add("show");

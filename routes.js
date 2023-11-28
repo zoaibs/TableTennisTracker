@@ -50,4 +50,71 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.post('/add-player', async (req, res) => {
+    try { 
+        const { username } = req.body;
+
+        
+
+        // Check if a user with the same username already exists
+        const existingUser = await User.findOne({ username });
+
+        console.log("im here!")
+
+        if (existingUser) {
+            //if there is a user with that username
+            return res.status(201).json({message: "User added to tournament!"})
+
+
+
+        } else {
+            //a user does not exist
+            return res.status(201).json({message: "A user with the specified username does not exist!"})
+        }
+
+        // If no existing user or password matches, create a new user 
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating user' });
+    }
+});
+
+router.post('/create-tournament', async (req, res) => {
+    try { 
+        const { username } = req.body;
+
+        
+
+        // Check if a user with the same username already exists
+        const existingUser = await User.findOne({ username });
+
+        console.log("im here!")
+
+        if (existingUser) {
+            //if there is a user with that username
+            if(existingUser.admin){
+                return res.status(201).json({message: "Tournament created!"})
+            } else {
+                return res.status(201).json({message: "Only admins can create tournaments!"})
+            }
+
+
+        } else {
+            //a user does not exist
+            return res.status(201).json({message: "A user with the specified username does not exist!"})
+        }
+
+        // If no existing user or password matches, create a new user 
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating user' });
+    }
+});
+
+
+
+
+
+
 module.exports = router
+ 

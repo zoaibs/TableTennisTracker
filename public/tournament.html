@@ -7,25 +7,31 @@
     </head>
     <body>
         <div class="navbar">
-            
             <ul class="navlist">
                 <a href="index.html"><img src="assets/paddle.png" class="logo"></a>
-
                 <li class="navitem"><a href="profile.html">Profile</a></li>
                 <li class="navitem"><a href="leaderboard.html"  class="active-tab" href="projects.html">Leaderboard</a></li>
                 <li class="navitem"><a href="tournament.html">Tournament</a></li>
                 <li class="navitem"><a href="about.html">About</a></li>
                 <li class="navitem"  style="text-decoration: none;"><a href="index.html">Home</a></li>
-                
             </ul>
-            
         </div>
         <h1 class="main-title">Tournament</h1>
         
+        <button id="create-tournament-btn">Create Tournament</button>
+        <input type="text" id="admin-key" placeholder="Enter the admin Key">
+
+        <input type="text" id="participant-input" placeholder="Enter participant name">
+        <button id="enter-participant">Enter Player</button>
         
+        <div class="popup">
+            <span class="popuptext" id="myPopup"></span>
+        </div>
 
 
-
+        <script type="text/javascript" src="tournament.js"></script>
+            
+       
     </body>
 </html>
 

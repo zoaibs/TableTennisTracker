@@ -41,6 +41,9 @@ const userSchema = new mongoose.Schema({
         datePlayed: {
             type: Date,
             default: Date.now()
+        },
+        admin: {
+            type: Boolean
         }
         // Other properties related to the game if needed
     }]
