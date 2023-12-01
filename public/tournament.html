@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>TableTennisTracker</title>
+        <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script src="http://underscorejs.org/underscore-min.js"></script>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     </head>
@@ -19,11 +21,24 @@
         <h1 class="main-title">Tournament</h1>
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div class="tournament-container">
-                <button id="create-tournament-btn">Create Tournament</button>
+                <button id="create-tournament-btn" style="font-family: 'Poppins', sans-serif;
+                color: white;
+                border: 0.1em solid white;
+                background-color: #15709D;
+                border-radius: 0.7em;
+                padding: 0.3em;
+                margin:0.4em;
+                font-size: 1.1em;">Create Tournament</button>
                 <!-- <input type="text" id="admin-key" placeholder="Enter the admin Key"> -->
 
-                <input type="text" id="participant-input" placeholder="Enter participant name">
-                <button id="enter-participant">Enter Player</button>
+                <input type="text" id="participant-input" placeholder="Enter participant name" style="margin-bottom: 1em;">
+                <button id="enter-participant" style="margin-bottom: 1em; font-family: 'Poppins', sans-serif;
+                color: white;
+                border: 0.1em solid white;
+                background-color: #15709D;
+                border-radius: 0.7em;
+                padding: 0.3em;
+                font-size: 1.1em;">Enter Player</button>
                 
                 <div class="popup">
                     <span class="popuptext" id="myPopup"></span>
@@ -31,9 +46,11 @@
 
                 <ul id="player-list"></ul>
 
-                <button id="generate-bracket">Generate Bracket</button>
+                <button id="generate-bracket" class="metroBtn">Generate Bracket</button>
             </div>
-            <div id="bracket"></div>
+            <!-- <div id="bracket"></div> -->
+            <!-- <div id="add" class="metroBtn">Add Bracket</div> -->
+		    <div class="brackets" id="brackets"></div>
         </div>
             
         
