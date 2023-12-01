@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
             } else {
                 //sign in the user if they do match!
                 console.log("Welcome back!")
-                return res.status(201).json({ message: 'Welcome back existing user!' });
+                return res.status(201).json({redirect:'/home.html', user: existingUser});
             }
             // Password matches, so allow registration with the same username
         } else {
@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
             console.log(hashedPassword)
             const newUser = new User({ username: username, password: hashedPassword });
             await newUser.save();
-            res.status(201).json({ message: 'User created successfully' });
+            return res.status(201).json({redirect:'/home.html', user: existingUser});
         }
 
         // If no existing user or password matches, create a new user 
@@ -80,7 +80,9 @@ router.post('/create-tournament', async (req, res) => {
         const { username } = req.body;
         // Check if a user with the same username already exists
         const existingUser = await User.findOne({ username });
-        console.log("im here!")
+
+        console.log("im here!")     
+
         if (existingUser) {
             //if there is a user with that username
             if(existingUser.admin){

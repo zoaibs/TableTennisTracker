@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>TableTennisTracker</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-    </head>
-    <body>
-        <div class="navbar">
-            
-            <ul class="navlist">
-                <a href="index.html"><img src="assets/paddle.png" class="logo"></a>
+<html lang="en">
+<head>
+    <title>TableTennisTracker - Profile</title>
+    <link rel="stylesheet" href="profile_style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="navbar">
+        <ul class="navlist">
+            <a href="index.html"><img src="assets/paddle.png" class="logo"></a>
+            <li class="navitem"><a href="profile.html" class="active-tab">Profile</a></li>
+            <li class="navitem"><a href="leaderboard.html">Leaderboard</a></li>
+            <li class="navitem"><a href="tournament.html">Tournament</a></li>
+            <li class="navitem"><a href="about.html">About</a></li>
+            <li class="navitem"><a href="index.html">Home</a></li>
+        </ul>
+    </div>
 
-                <li class="navitem"><a href="profile.html">Profile</a></li>
-                <li class="navitem"><a href="leaderboard.html"  class="active-tab" href="projects.html">Leaderboard</a></li>
-                <li class="navitem"><a href="tournament.html">Tournament</a></li>
-                <li class="navitem"><a href="about.html">About</a></li>
-                <li class="navitem"  style="text-decoration: none;"><a href="index.html">Home</a></li>
-                
-            </ul>
-            
+    <div class="content-container">
+        <h1 class="main-title">User Profile</h1>
+
+        <!-- Replace these placeholders with actual user data -->
+        <div class="profile-info">
+            <p><strong>Username:</strong> <span id="usernamePlaceholder">User123</span></p>
+            <p><strong>ELO:</strong> <span id="eloPlaceholder">1200</span></p>
+            <p><strong>Best Opponent:</strong> <span id="bestOpponentPlaceholder">Opponent123</span></p>
+            <p><strong>Win Percent:</strong> <span id="winPercentPlaceholder">75%</span></p>
         </div>
-        <h1 class="main-title">Profile</h1>
+
+        <h2 class="main-title">Match History</h2>
         
-        
-
-
-
-    </body>
+        <!-- Replace this section with dynamic rendering of match history -->
+        <div class="match-history">
+            <!-- Example match record, repeat for each match -->
+            <div class="match-record">
+                <p><strong>Opponent:</strong> <span class="opponent-name">Opponent1</span></p>
+                <p><strong>Score:</strong> <span class="match-score">2-1</span></p>
+                <p><strong>Date Played:</strong> <span class="date-played">2023-01-01</span></p>
+                <!-- Add more match details as needed -->
+            </div>
+        </div>
+    </div>
+</body>
 </html>
-

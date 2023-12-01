@@ -86,7 +86,7 @@ body {
     padding:0.7em;
 }
 
-.login-button{
+/* .login-button{
     font-family: 'Poppins', sans-serif;
     color: white;
     border: 0.1em solid white;
@@ -95,7 +95,7 @@ body {
     padding: 0.3em;
     margin:0.4em;
     font-size: 1.1em;
-}
+} */
 
 .signup-button{
     font-family: 'Poppins', sans-serif;
