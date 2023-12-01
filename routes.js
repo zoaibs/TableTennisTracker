@@ -6,6 +6,8 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
     try { 
         const { username, password } = req.body;
+        console.log(username)
+        console.log(password)
 
         if(password.length < 8){
             console.log("Too short!")
@@ -46,7 +48,7 @@ router.post('/register', async (req, res) => {
         // If no existing user or password matches, create a new user 
         
     } catch (error) {
-        res.status(500).json({ message: 'Error creating user' });
+        res.status(200).json({ message: 'Error creating user' });
     }
 });
 

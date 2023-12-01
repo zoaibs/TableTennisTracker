@@ -3,10 +3,12 @@ var popup = document.getElementById("myPopup");
 
 document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent the default form submission
-  
+    let username = '';
+    let password = '';
+
     // Get the value from the input field
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
  
     // if(password.length < 8){
     //     popup.textContent = "Password is too short!"
@@ -24,15 +26,14 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             },
             body: JSON.stringify({ username, password }),
         });
-        if (response.redirected) {
-            window.location.href = response.url;;
-        
-        
-        }
+        const data = await response.json();
 
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
         else {
             // Handle other responses
-            const data = await response.json();
+            // const data = await response.json();
             //return response.json();
         
         // Check if the data contains a redirect property
@@ -53,7 +54,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         }
     }
 
-        const data = await response.json();
+        //const data = await response.json();
         console.log("Uh oh!")
         console.log(data.message);
         if(data.message === "Username already taken" && password.length < 8){
@@ -72,6 +73,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         }
         // Handle response
     } catch (error) {
+        console.log(error)
         console.error("There was a deadly error oh noooo!");
     }
     

@@ -17,18 +17,25 @@
             </ul>
         </div>
         <h1 class="main-title">Tournament</h1>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="tournament-container">
+                <button id="create-tournament-btn">Create Tournament</button>
+                <!-- <input type="text" id="admin-key" placeholder="Enter the admin Key"> -->
 
-        <div class="tournament-container">
-            <button id="create-tournament-btn">Create Tournament</button>
-            <!-- <input type="text" id="admin-key" placeholder="Enter the admin Key"> -->
+                <input type="text" id="participant-input" placeholder="Enter participant name">
+                <button id="enter-participant">Enter Player</button>
+                
+                <div class="popup">
+                    <span class="popuptext" id="myPopup"></span>
+                </div>
 
-            <input type="text" id="participant-input" placeholder="Enter participant name">
-            <button id="enter-participant">Enter Player</button>
-            
-            <div class="popup">
-                <span class="popuptext" id="myPopup"></span>
+                <ul id="player-list"></ul>
+
+                <button id="generate-bracket">Generate Bracket</button>
             </div>
+            <div id="bracket"></div>
         </div>
+            
         
 
         <script type="text/javascript" src="tournament.js"></script>
