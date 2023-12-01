@@ -9,6 +9,18 @@ let popup = document.getElementById("myPopup");
 participantInput.style.display = 'none';
 enterButton.style.display = 'none';
 
+// Function to show popup in the center of the screen
+function showPopup(message) {
+    popup.textContent = message;
+    popup.style.position = 'fixed'; // Use fixed position
+    popup.style.top = '50%'; // Center vertically
+    popup.style.left = '50%'; // Center horizontally
+    popup.style.transform = 'translate(-50%, -50%)'; // Adjust the position
+    popup.style.zIndex = '1000'; // Ensure it's on top
+    popup.classList.add("show");
+}
+
+
 createTournamentBtn.addEventListener('click', async function() {
     // Show the participant input and enter button
     const response = await fetch('/create-tournament', {
@@ -16,21 +28,27 @@ createTournamentBtn.addEventListener('click', async function() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({admin: true}),
     });
 
     const data = await response.json();
-    if(data.message = "Tournament created!"){
-        participantInput.style.display = 'block';
-        enterButton.style.display = 'block';
-        popup.message = data.message;
-        popup.add("show")
-    } else {
-        popup.message = data.message;
-        popup.add("show")
-    }
+    participantInput.style.display = 'block';
+    enterButton.style.display = 'block';
+    popup.textContent = "Tournament created" //data.message;
+    popup.classList.add("show")
+
+
+    // if(data.message = "Tournament created!"){
+    //     participantInput.style.display = 'block';
+    //     enterButton.style.display = 'block';
+    //     popup.textContent = data.message;
+    //     popup.classList.add("show")
+    // } else {
+    //     popup.textContent = data.message;
+    //     popup.classList.add("show")
+    // }
     
-    participantInput.value = '';
+    participantInput.value = ''; 
 });
 
 enterButton.addEventListener('click', async function() {
