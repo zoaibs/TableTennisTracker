@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
         }
 
         // Check if a user with the same username already exists
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({username: username});
 
         console.log("im here!")
 
@@ -53,27 +53,23 @@ router.post('/register', async (req, res) => {
 router.post('/add-player', async (req, res) => {
     try { 
         const { username } = req.body;
-
-        
-
+        console.log("Username" + username)
         // Check if a user with the same username already exists
-        const existingUser = await User.findOne({ username });
-
-        console.log("im here!")
+        const existingUser = await User.findOne({ username: username });
+        console.log(existingUser)
 
         if (existingUser) {
             //if there is a user with that username
-            return res.status(201).json({message: "User added to tournament!"})
-
-
+            console.log("added")
+            return res.status(201).json({message: "User added!"})
 
         } else {
             //a user does not exist
+            console.log("does not exist")
             return res.status(201).json({message: "A user with the specified username does not exist!"})
         }
 
         // If no existing user or password matches, create a new user 
-        
     } catch (error) {
         res.status(500).json({ message: 'Error creating user' });
     }
@@ -82,14 +78,9 @@ router.post('/add-player', async (req, res) => {
 router.post('/create-tournament', async (req, res) => {
     try { 
         const { username } = req.body;
-
-        
-
         // Check if a user with the same username already exists
         const existingUser = await User.findOne({ username });
-
         console.log("im here!")
-
         if (existingUser) {
             //if there is a user with that username
             if(existingUser.admin){
@@ -97,15 +88,11 @@ router.post('/create-tournament', async (req, res) => {
             } else {
                 return res.status(201).json({message: "Only admins can create tournaments!"})
             }
-
-
         } else {
             //a user does not exist
             return res.status(201).json({message: "A user with the specified username does not exist!"})
         }
-
         // If no existing user or password matches, create a new user 
-        
     } catch (error) {
         res.status(500).json({ message: 'Error creating user' });
     }

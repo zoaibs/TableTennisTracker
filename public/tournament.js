@@ -3,6 +3,7 @@ const participantInput = document.getElementById('participant-input');
 const enterButton = document.getElementById('enter-participant');
 const adminKey = document.getElementById('admin-key');
 let popup = document.getElementById("myPopup");
+let tournamentMembers = [];
 
 
 // Hide the participant input and enter button initially
@@ -37,16 +38,6 @@ createTournamentBtn.addEventListener('click', async function() {
     popup.textContent = "Tournament created" //data.message;
     popup.classList.add("show")
 
-
-    // if(data.message = "Tournament created!"){
-    //     participantInput.style.display = 'block';
-    //     enterButton.style.display = 'block';
-    //     popup.textContent = data.message;
-    //     popup.classList.add("show")
-    // } else {
-    //     popup.textContent = data.message;
-    //     popup.classList.add("show")
-    // }
     
     participantInput.value = ''; 
 });
@@ -58,16 +49,26 @@ enterButton.addEventListener('click', async function() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({participantName}),
+        body: JSON.stringify({username: participantName}),
     });
 
     const data = await response.json();
+
     let popupMessage = data.message;
+    
 
-    popup.message = popupMessage;
-    popup.add("show")
-    //show popup
-
+    if(data.message === "User added!"){
+        if(tournamentMembers.includes(participantName)) {
+            popupMessage = "This user has already been added!"
+        } else {
+            tournamentMembers.push(participantName)
+        }
+        
+        console.log(tournamentMembers)
+    }
+    popup.textContent = popupMessage;
+    popup.classList.add("show")
+    
 })
             
 
