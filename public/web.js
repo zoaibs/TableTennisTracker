@@ -10,13 +10,13 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     username = document.getElementById("username").value;
     password = document.getElementById("password").value;
  
-    // if(password.length < 8){
-    //     popup.textContent = "Password is too short!"
-    //     popup.classList.add("show");
-    //     console.log("tooshort")
-    //     //document.getElementById("username").value = "";
-    // } else {
-    //popup.classList.remove("show")
+    if(password.length < 8){
+        popup.textContent = "Password is too short!"
+        popup.classList.add("show");
+        console.log("tooshort")
+        //document.getElementById("username").value = "";
+    } else {
+    popup.classList.remove("show")
 
     try {
         const response = await fetch('/register', {
@@ -76,5 +76,5 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         console.log(error)
         console.error("There was a deadly error oh noooo!");
     }
-    
+}
 });
