@@ -1,31 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TableTennisTracker</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-    </head>
-    <body>
-        <div class="navbar">
-            
-            <ul class="navlist">
-                <a href="index.html"><img src="assets/paddle.png" class="logo"></a>
+<head>
+    <title>TableTennisTracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+        /* Add additional styling if needed */
+        .leaderboard {
+            margin: 20px;
+            font-size: 1.5rem;
+            color: var(--blue);
+        }
 
-                <li class="navitem"><a href="profile.html">Profile</a></li>
-                <li class="navitem"><a href="leaderboard.html"  class="active-tab" href="projects.html">Leaderboard</a></li>
-                <li class="navitem"><a href="tournament.html">Tournament</a></li>
-                <li class="navitem"><a href="about.html">About</a></li>
-                <li class="navitem"  style="text-decoration: none;"><a href="index.html">Home</a></li>
-                
-            </ul>
-            
-        </div>
-        <h1 class="main-title">Leaderboard</h1>
-        
-        
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Center vertically */
+            padding: 10px;
+        }
 
+        .user-name {
+            flex: 1;
+            color: white;
+            text-align: center; /* Center horizontally */
+        }
 
+        .elo-rating {
+            flex: 1;
+            text-align: center; /* Center horizontally */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul class="navlist">
+            <a href="index.html"><img src="assets/paddle.png" class="logo"></a>
+            <li class="navitem"><a href="profile.html">Profile</a></li>
+            <li class="navitem"><a href="leaderboard.html" class="active-tab">Leaderboard</a></li>
+            <li class="navitem"><a href="tournament.html">Tournament</a></li>
+            <li class="navitem"><a href="about.html">About</a></li>
+            <li class="navitem"><a href="index.html">Home</a></li>
+        </ul>
+    </div>
+    <h1 class="main-title">Leaderboard</h1>
 
-    </body>
+    <div class="leaderboard" id="leaderboard">
+        <!-- Leaderboard content will be dynamically added here -->
+    </div>
+
+    <script>
+        // Function to generate a random number between min and max
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Function to generate a random leaderboard
+        function generateRandomLeaderboard() {
+            const users = ["user1", "user2", "user3", "user4", "user5"];
+            const leaderboardContainer = document.getElementById("leaderboard");
+
+            // Create an array of objects with user and elo
+            const userEloArray = users.map(user => ({ user, elo: getRandomNumber(100, 1200) }));
+
+            // Sort the array based on elo in descending order
+            userEloArray.sort((a, b) => b.elo - a.elo);
+
+            userEloArray.forEach(item => {
+                // Create a new user row
+                const userRow = document.createElement("div");
+                userRow.classList.add("user-row");
+
+                // Add user name
+                const userName = document.createElement("div");
+                userName.classList.add("user-name");
+                userName.textContent = item.user;
+                userRow.appendChild(userName);
+
+                // Add ELO rating
+                const eloElement = document.createElement("div");
+                eloElement.classList.add("elo-rating");
+                eloElement.textContent = `ELO: ${item.elo}`;
+                userRow.appendChild(eloElement);
+
+                // Append the user row to the leaderboard container
+                leaderboardContainer.appendChild(userRow);
+            });
+        }
+
+        // Call the function to generate the random leaderboard
+        generateRandomLeaderboard();
+    </script>
+</body>
 </html>
-
