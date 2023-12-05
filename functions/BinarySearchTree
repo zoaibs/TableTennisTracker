@@ -41,4 +41,87 @@ class BinarySearchTree{
     remove(data) {
         this.root = this.removeNode(this.root, data);
     }
+
+    removeNode(node, key) {
+        if (node === null) {
+          return null;
+        }
+        else if (key<node.data){
+            node.left = this.removeNode(node.left, key);
+            console.log("left")
+            return node;
+        }
+        else if (key>node.data){
+            node.right = this.removeNode(node.right, key);
+            console.log("right")
+            return node;
+        }
+
+
+        else{
+            console.log("delete")
+
+            if (node.left === null && node.right === null) {
+                node = null;
+                return node;
+            }
+            
+
+            if (node.left === null) {
+                node = node.right;
+                return node;
+            } 
+            
+            else if (node.right === null) {
+                node = node.left;
+                return node;
+            }
+            
+        }
+    }
+
+    inorder(node) {
+        console.log("inorder");
+        let list = this.inorderHelper(this.root, []);
+        return list;
+    }
+    inorderHelper(node, list) {
+        if (node !== null) {
+          console.log("inorder help")
+          this.inorderHelper(node.left, list);
+          list.push(node.data);
+          this.inorderHelper(node.right, list);
+        }
+        return list;
+    }
+
+    findMaxNode() {
+        console.log("find max node")
+        return this.findMaxNodeHelper(this.root);
+    }
+    
+    findMaxNodeHelper(node) {
+        console.log("find max node helper")
+        
+        if (node === null) { console.log("No Node");}
+        if (node.right === null) {
+          return node.data;
+        }
+        else return this.findMaxNodeHelper(node.right);
+    }
+
+    findMinNode(){
+        console.log("find min node")
+        return this.findMinNodeHelper(this.root);
+    }
+    
+    findMinNodeHelper(node){
+        console.log("find min node helper")
+        if (node === null) { console.log("No Node");}
+        if (node.left === null) {
+            console.log("MIN: " + node.data.firstName);
+            return node;
+        }
+        else return this.findMinNodeHelper(node.left);
+    }
 }
