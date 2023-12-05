@@ -108,6 +108,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         });
         const data = await response.json();
 
+        console.log(data.message)
+
         if (response.redirected) {
             window.location.href = response.url;
         }
@@ -123,7 +125,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             // Handle the redirect manually
             //localStorage.setItem('user', JSON.stringify(data.user));
             window.location.href = `${redirectUrl}`;
-        } else if(data && data.message == "Username already taken")
+        } else if(data && data.message === "Username already taken")
         {
             popup.textContent = "Username already taken, please try again!"
             popup.classList.add("show");

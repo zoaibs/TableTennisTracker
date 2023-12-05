@@ -57,11 +57,11 @@
 
         // Function to generate a random leaderboard
         function generateRandomLeaderboard() {
-            const users = ["user1", "user2", "user3", "user4", "user5"];
+            const users = ["user6", "user2", "user3", "user4", "user5"];
             const leaderboardContainer = document.getElementById("leaderboard");
 
             // Create an array of objects with user and elo
-            const userEloArray = users.map(user => ({ user, elo: getRandomNumber(100, 1200) }));
+            const userEloArray = users.map(user => ({ user, elo: getRandomNumber(400, 1200) }));
 
             // Sort the array based on elo in descending order
             userEloArray.sort((a, b) => b.elo - a.elo);
