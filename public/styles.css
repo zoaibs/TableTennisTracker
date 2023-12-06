@@ -315,3 +315,11 @@ html, body, .brackets {
 .brackets > div > div > div:last-of-type {
   margin-bottom: 0px;
 }
+
+
+.matchup {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
