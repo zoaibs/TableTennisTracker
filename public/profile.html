@@ -22,24 +22,105 @@
 
         <!-- Replace these placeholders with actual user data -->
         <div class="profile-info">
-            <p><strong>Username:</strong> <span id="usernamePlaceholder">user1</span></p>
-            <p><strong>ELO:</strong> <span id="eloPlaceholder">120</span></p>
+            <p><strong>Username:</strong> <span id="usernamePlaceholder">{{ user.username }}</span></p>
+<p><strong>ELO:</strong> <span id="eloPlaceholder">{{ user.elo }}</span></p>
             <p><strong>Best Opponent:</strong> <span id="bestOpponentPlaceholder">user3</span></p>
             <p><strong>Win Percent:</strong> <span id="winPercentPlaceholder">100%</span></p>
         </div>
 
-        <h2 class="main-title">Match History</h2>
         
-        <!-- Replace this section with dynamic rendering of match history -->
-        <div class="match-history">
-            <!-- Example match record, repeat for each match -->
-            <div class="match-record">
-                <p><strong>Opponent:</strong> <span class="opponent-name">user3</span></p>
-                <p><strong>Score:</strong> <span class="match-score">21-16</span></p>
-                <p><strong>Date Played:</strong> <span class="date-played">2023-11-21</span></p>
-                <!-- Add more match details as needed -->
-            </div>
-        </div>
     </div>
 </body>
+<script>
+     let userList = []
+        let users = []
+
+        const username = getQueryParam("username");
+        console.log("username: " + username);
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        fetch(`/getUserByUsername?username=${username}`)
+  .then(response => response.json())  
+  .then(userCurr => {
+    // Handle the received user information
+    userList=userCurr.users;
+    console.log("User Information:", userCurr);
+    user=userCurr.user
+    users.push(user)
+    console.log(fetchUserData())
+    fetchOtherUserData()
+    console.log(users)
+    // You can use the user information as needed
+  })
+
+  async function fetchUserData(){
+    
+    const response = await fetch('/userGet', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      
+  })
+
+  
+  if (response.ok) {
+        const data = await response.json();
+
+        user=data;
+        updateProfile();
+        return data; // Return the data from the asynchronous operation
+    }
+    
+  }
+
+  async function fetchOtherUserData(){
+    console.log(userList)
+    let counter = 0;
+    for (let i = 0; i<userList.length; i++){
+      let userCurr = userList[i]
+        const response = await fetch('/userGet', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userCurr),
+      })
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        users.push(data)
+        
+        
+        // Return the data from the asynchronous operation
+      }
+      
+    }
+
+  }
+
+  async function updateProfile(){
+
+  // Assuming that you have HTML elements with specific IDs to display user information
+  const usernameElement = document.getElementById('usernamePlaceholder');
+  const eloElement = document.getElementById('eloPlaceholder');
+  const bestOpponentElement = document.getElementById('bestOpponentPlaceholder');
+  const winPercentElement = document.getElementById('winPercentPlaceholder');
+
+  // Assuming that the user data structure contains properties like 'username', 'elo', 'bestOpponent', 'winPercent'
+   // Assuming the first user in the 'users' array is the current user
+
+  // Update profile information with fetched data
+  usernameElement.textContent = user.username;
+  eloElement.textContent = user.elo;
+  bestOpponentElement.textContent = user.bestOpponent; // Update with the actual property name from your data
+  winPercentElement.textContent = user.winPercent; // Update with the actual property name from your data
+}
+  
+</script>
 </html>

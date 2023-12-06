@@ -1,8 +1,12 @@
 const express = require('express');
 const User = require('./User');
 const bcrypt = require('bcrypt')
+const bodyParser = require('body-parser');
 const router = express.Router();
+let users = [];
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/register', async (req, res) => {
     try { 
         const { username, password } = req.body;
@@ -31,6 +35,8 @@ router.post('/register', async (req, res) => {
             } else {
                 //sign in the user if they do match!
                 console.log("Welcome back!")
+                console.log(users)
+                users.push(existingUser);
                 return res.status(201).json({redirect:'/home.html', user: existingUser});
             }
             // Password matches, so allow registration with the same username
@@ -41,6 +47,11 @@ router.post('/register', async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
             console.log(hashedPassword)
             const newUser = new User({ username: username, password: hashedPassword });
+            users.push(newUser);
+            if (users.length == 1){
+                newUser.admin=true;
+            }
+            console.log(users)
             await newUser.save();
             return res.status(201).json({redirect:'/home.html', user: existingUser});
         }
@@ -52,6 +63,34 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/getUserByUsername', (req, res) => {
+    const { username } = req.query;
+    
+    const user = users.find(u => u.username === username);
+    console.log(user)
+    if (user) {
+      res.json({user, users});
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  });
+  router.post('/userGet', async (req, res) => {
+    try{
+    const user=req.body;
+
+   // console.log(user._id)
+    let newUser = await User.findByIdAndUpdate(user._id, user, {
+        new: false
+    });
+    
+    //console.log(newUser)
+    await newUser.save();
+        return res.status(201).json(newUser)
+    } 
+    catch{
+        return res.status(400).json({message: "Error updating team"})
+    }
+});
 router.post('/add-player', async (req, res) => {
     try { 
         const { username } = req.body;

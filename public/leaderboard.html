@@ -51,45 +51,141 @@
 
     <script>
         // Function to generate a random number between min and max
-        function getRandomNumber(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
+        let userList = []
+        let users = []
+
+        const username = getQueryParam("username");
+        console.log("username: " + username);
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
+         fetch(`/getUserByUsername?username=${username}`)
+  .then(response => response.json())  
+  .then(userCurr => {
+    // Handle the received user information
+    userList=userCurr.users;
+    console.log("User Information:", userCurr);
+    user=userCurr.user
+    users.push(user)
+    console.log(fetchUserData())
+    fetchOtherUserData()
+    console.log(userList)
+    
+    // You can use the user information as needed
+  })
+  async function fetchUserData(){
+    
+    const response = await fetch('/userGet', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      
+  })
+
+  
+  if (response.ok) {
+        const data = await response.json();
+      
+        user=data;
+        return data; // Return the data from the asynchronous operation
+    }
+    
+  }
+
+  async function fetchOtherUserData(){
+    console.log(userList)
+    let counter = 0;
+    for (let i = 0; i<userList.length; i++){
+      let userCurr = userList[i]
+        const response = await fetch('/userGet', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userCurr),
+      })
+
+      if (response.ok) {
+        const data=null;
+        while(data==null){
+        data = await response.json();
+        console.log(data);
+        users.push(data)
+        }
+        
+        // Return the data from the asynchronous operation
+      }
+      
+    }
+
+  }
+
+  while (users.length<0){  
+  }
+  let leaderboardMap = new Map();
+  console.log(users)
+    // Inside your loop, call the addToLeaderboard function for each user
+    for (let i = 0; i < userList.length; i++) {
+        const user = userList[i];
+        console.log(user)
+        addToLeaderboard(user);
+    }
+  function addToLeaderboard(user) {
+        leaderboardMap.set(user.username, user.elo);
+        console.log(leaderboardMap) // Assuming 'username' and 'elo' are attributes of the User schema
+    }
+
+    const leaderboardContainer = document.getElementById('leaderboard');
+
+
+    leaderboardContainer.innerHTML = '';
+
+// Iterate over the sorted leaderboard and append rows to the HTML
+function renderLeaderboard() {
+        // Sort the leaderboardMap based on ELO ratings
+        const sortedLeaderboard = new Map([...leaderboardMap.entries()].sort((a, b) => b[1] - a[1]));
+
+        // Get the leaderboard container element from the HTML
+        const leaderboardContainer = document.getElementById('leaderboard');
+
+        // Clear previous content in the leaderboard container
+        leaderboardContainer.innerHTML = '';
+
+        // Iterate over the sorted leaderboard and append rows to the HTML
+        for (const [username, elo] of sortedLeaderboard) {
+            const userRow = document.createElement('div');
+            userRow.classList.add('user-row');
+
+            const userNameElement = document.createElement('div');
+            userNameElement.classList.add('user-name');
+            userNameElement.textContent = username;
+
+            const eloRatingElement = document.createElement('div');
+            eloRatingElement.classList.add('elo-rating');
+            eloRatingElement.textContent = `ELO: ${elo}`;
+
+            userRow.appendChild(userNameElement);
+            userRow.appendChild(eloRatingElement);
+
+            leaderboardContainer.appendChild(userRow);
+        }
+    }
+
+    // Your existing code...
+    
+
+    // After adding all users, call the renderLeaderboard function to display the sorted leaderboard
+    renderLeaderboard();
 
         // Function to generate a random leaderboard
-        function generateRandomLeaderboard() {
-            const users = ["user6", "user2", "user3", "user4", "user5"];
-            const leaderboardContainer = document.getElementById("leaderboard");
 
-            // Create an array of objects with user and elo
-            const userEloArray = users.map(user => ({ user, elo: getRandomNumber(400, 1200) }));
-
-            // Sort the array based on elo in descending order
-            userEloArray.sort((a, b) => b.elo - a.elo);
-
-            userEloArray.forEach(item => {
-                // Create a new user row
-                const userRow = document.createElement("div");
-                userRow.classList.add("user-row");
-
-                // Add user name
-                const userName = document.createElement("div");
-                userName.classList.add("user-name");
-                userName.textContent = item.user;
-                userRow.appendChild(userName);
-
-                // Add ELO rating
-                const eloElement = document.createElement("div");
-                eloElement.classList.add("elo-rating");
-                eloElement.textContent = `ELO: ${item.elo}`;
-                userRow.appendChild(eloElement);
-
-                // Append the user row to the leaderboard container
-                leaderboardContainer.appendChild(userRow);
-            });
-        }
 
         // Call the function to generate the random leaderboard
-        generateRandomLeaderboard();
+        
     </script>
 </body>
 </html>

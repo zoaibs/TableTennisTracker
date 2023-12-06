@@ -122,9 +122,10 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         if (data && data.redirect) {
             const redirectUrl = data.redirect;
             console.log(redirectUrl)
+            const urlWithUsername = `${redirectUrl}?username=${encodeURIComponent(username)}`;
             // Handle the redirect manually
             //localStorage.setItem('user', JSON.stringify(data.user));
-            window.location.href = `${redirectUrl}`;
+            window.location.href = `${urlWithUsername}`;
         } else if(data && data.message === "Username already taken")
         {
             popup.textContent = "Username already taken, please try again!"

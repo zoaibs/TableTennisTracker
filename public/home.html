@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TableTennisTracker</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-    </head>
-    <body>
-        <div class="navbar">
-            
-            <ul class="navlist">
-                <a href="index.html"><img src="/paddle.png" class="logo"></a>
+<head>
+    <title>TableTennisTracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+</head>
+<body>
+    <div class="navbar">
+        <ul class="navlist">
+            <a href="index.html" id="homeLink"><img src="/paddle.png" class="logo"></a>
+            <li class="navitem"><a href="profile.html" id="profileLink">Profile</a></li>
+            <li class="navitem"><a href="leaderboard.html" id="leaderboardLink" class="active-tab">Leaderboard</a></li>
+            <li class="navitem"><a href="tournament.html" id="tournamentLink">Tournament</a></li>
+            <li class="navitem"><a href="about.html" id="aboutLink">About</a></li>
+            <li class="navitem" style="text-decoration: none;"><a href="index.html" id="homeLink">Home</a></li>
+        </ul>
+    </div>
+    <h1 class="main-title">Welcome to TableTennis Tracker!</h1>
 
-                <li class="navitem"><a href="profile.html">Profile</a></li>
-                <li class="navitem"><a href="leaderboard.html"  class="active-tab" href="projects.html">Leaderboard</a></li>
-                <li class="navitem"><a href="tournament.html">Tournament</a></li>
-                <li class="navitem"><a href="about.html">About</a></li>
-                <li class="navitem"  style="text-decoration: none;"><a href="index.html">Home</a></li>
-                
-            </ul>
-            
-        </div>
-        <h1 class="main-title">Welcome to TableTennis Tracker!</h1>
-        
-        
+    <script>
+        const username = getQueryParam("username");
+        console.log("username: " + username);
 
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
+        // Dynamically update links with username
+        const linksToUpdate = ['homeLink', 'profileLink', 'leaderboardLink', 'tournamentLink', 'aboutLink'];
 
-    </body>
+        linksToUpdate.forEach(linkId => {
+            const link = document.getElementById(linkId);
+            if (link) {
+                link.href = link.href + '?username=' + encodeURIComponent(username);
+            }
+        });
+    </script>
+</body>
 </html>
-
