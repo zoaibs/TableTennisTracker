@@ -135,6 +135,10 @@ function displayMatchups(tournament) {
     container.innerHTML = ''; // Clear existing content
 
     tournament.upcomingMatchups.forEach((match, index) => {
+
+        let player1 = match.player1;
+        let player2 = match.player2;
+
         const matchElement = document.createElement('div');
         matchElement.className = 'matchup';
 
@@ -163,20 +167,44 @@ function displayMatchups(tournament) {
         submitButton.textContent = 'Submit';
         submitButton.onclick = function() {
             const winnerName = document.getElementById('winner' + index).value;
+            const loserName = player1 ? !(player1 === winnerName) : player2;
+
+            
             const winnerScore = document.getElementById('winnerScore' + index).value;
             const loserScore = document.getElementById('loserScore' + index).value;
             const winnerIndex = tournament.heap.indexOf(winnerName);
-
+        
             if (winnerIndex !== -1) {
-                // You can now use winnerScore and loserScore as needed
-                console.log(`Winner: ${winnerName}, Winner Score: ${winnerScore}, Loser Score: ${loserScore}`);
-                tournament.playMatch(winnerIndex);
-                displayMatchups(tournament); // Refresh the display
-                
+                // Prepare data to be sent
+                const matchData = {
+                    winner: winnerName,
+                    loser: loserName,
+                    winnerScore: winnerScore,
+                    loserScore: loserScore
+                };
+        
+                // Send data using fetch API
+                fetch('/submit-match', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(matchData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    tournament.playMatch(winnerIndex);
+                    displayMatchups(tournament); // Refresh the display
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
             } else {
                 alert('Invalid winner name');
             }
         };
+        
 
         matchElement.appendChild(winnerInput);
         matchElement.appendChild(winnerScoreInput);

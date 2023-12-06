@@ -102,6 +102,59 @@ router.post('/create-tournament', async (req, res) => {
     }
 });
 
+router.post('/submit-match', async (req, res) => {
+    try {
+        const { winner, loser, winnerScore, loserScore } = req.body;
+
+        // Find the user by the winner's name
+        const user = await User.findOne({ username: winner });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Update the winner's match history
+        const match = {
+            score: {
+                userPoints: winnerScore,
+                opponentPoints: loserScore,
+                matchWon: true // Assuming the user who submits the score is always the winner
+            },
+            datePlayed: new Date() // Current date and time
+            // Add any other relevant match information
+        };
+
+        user.matchHistory.push(match);
+        await user.save();
+
+
+        // Find the user by the winner's name
+        const user2 = await User.findOne({ username: winner });
+
+        if (!user2) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Update the loser's match history
+        const match2 = {
+            score: {
+                userPoints: loserScore,
+                opponentPoints: winnerScore,
+                matchWon: false // Assuming the user who submits the score is always the winner
+            },
+            datePlayed: new Date() // Current date and time
+            // Add any other relevant match information
+        };
+
+        user2.matchHistory.push(match2);
+        await user2.save();
+
+        res.status(200).json({ message: "Match history updated successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error updating match history" });
+    }
+});
 
 
 
